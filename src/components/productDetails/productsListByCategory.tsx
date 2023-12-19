@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   productList: {
-    marginLeft: 16,
     marginRight: 16,
   },
   loadingContainer: {

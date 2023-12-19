@@ -85,7 +85,7 @@ export const ProductDetailsScreen = () => {
       key: 'image',
       component: product?.images[0] ? (
         <Image source={{ uri: product?.images[0] }} style={styles.image} />
-      ) : null,
+      ) : null
     },
     {
       key: 'info',
@@ -185,7 +185,7 @@ export const ProductDetailsScreen = () => {
   ];
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#FF0024" />
@@ -196,7 +196,7 @@ export const ProductDetailsScreen = () => {
             data={data}
             renderItem={({ item }) => item.component}
             keyExtractor={(item) => item.key}
-            style={{marginBottom: 120}}
+            style={{marginBottom: '30%'}}
           />
 
           <View style={styles.viewquanty}>
@@ -225,7 +225,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 64,
     marginBottom: 40,
-
   },
   containerdesc: {
     fontSize: 14,
@@ -234,17 +233,15 @@ const styles = StyleSheet.create({
   },
 
   viewquanty: {
-    marginTop: "170%",
-    backgroundColor: "#fff",
+    marginTop: "172%",
     position: "absolute",
-    verticalAlign: "bottom",
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    marginBottom: 10,
-    elevation: 8,
     paddingTop: 28,
-    paddingBottom: 45
+    paddingBottom: 45,
+    backgroundColor: "#fff",
+    elevation:8
   },
   
   containerquanty: {
@@ -253,6 +250,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: '80%',
   },
+
   image: {
     width: '100%',
     height: 400,
@@ -260,15 +258,18 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '700',
+    color: "#000"
   },
   category: {
     fontSize: 11,
-    color: 'gray',
+    fontWeight: "400",
+    color: '#9B9B9B',
   },
   price: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '700',
+    color: "#000"
   },
   increasebutton: {
     borderTopRightRadius: 16,
@@ -281,15 +282,13 @@ const styles = StyleSheet.create({
     height: 43,
   },
   containerButton1: {
-    height: 56,
     justifyContent: 'center',
-    borderColor: 'gray',
+    borderColor: '#B6B6B6',
     borderTopWidth: 1,
   },
   containerButton2: {
-
     justifyContent: 'center',
-    borderColor: 'gray',
+    borderColor: '#B6B6B6',
     borderWidth: 1,
   },
 
@@ -299,11 +298,15 @@ const styles = StyleSheet.create({
   textButton: {
     marginLeft: 16,
     fontSize: 16,
+    color: "#000",
+    fontWeight: "400"
   },
   infoText: {
     marginLeft: 16,
-    fontSize: 14,
+    fontSize: 12,
     flex: 1,
+    color: "red",
+    fontWeight: "400"
   },
   label: {
     flex: 0,

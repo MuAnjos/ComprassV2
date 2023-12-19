@@ -9,8 +9,11 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC = ({ children }) => {
-  ('');
+interface AuthProviderInterface {
+  children: React.ReactNode;
+}
+
+export const AuthProvider = ({ children }:AuthProviderInterface) => {
   const [user, setUser] = useState<string | null>(null);
 
   useEffect(() => {
