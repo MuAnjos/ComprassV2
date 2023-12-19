@@ -85,4 +85,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     height: '100%',
   },
+  number: {
+    fontSize: 24,
+    fontWeight: "600"
+  }
 });
