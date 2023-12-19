@@ -33,8 +33,6 @@ ProductContainer.displayName = 'ProductContainer';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 16,
-    marginTop: 8,
   },
   increasebutton: {
     borderTopRightRadius: 16,

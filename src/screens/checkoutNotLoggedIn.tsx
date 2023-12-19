@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const CheckoutNotLoggedin = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const handleLogin = async () => {
     navigation.navigate('LoginScreen');

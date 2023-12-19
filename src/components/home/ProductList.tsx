@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+  Dimensions,
+  Text,
+} from 'react-native';
 import { fetchProductsForCategory } from '../../services/fakeStoreAPI';
 import { ProductType } from '../../interfaces/productType';
 import { LoadingProducts } from './loadingProduct';
 import { ProductContainer } from './productContainer';
+import { Category } from './CategoryList';
 
 interface ProductListProps {
   categoryId: number;
+  item: Category;
 }
 
 export const ProductList: React.FC<ProductListProps> = ({
   categoryId,
+  item,
 }: ProductListProps) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,9 +58,24 @@ export const ProductList: React.FC<ProductListProps> = ({
     }
   };
 
+  const ListHeader = () => (
+    <View style={styles.header}>
+      <Text style={styles.categoryTitle}>{item.name}</Text>
+      <Text>View all</Text>
+    </View>
+  );
+
+  const ListFooter = () =>
+    loading && page > 1 && hasMore ? (
+      <View style={styles.loadingProducts}>
+        <ActivityIndicator size="large" color="red" />
+      </View>
+    ) : null;
+
   return (
-    <View style={styles.productList}>
+    <View style={styles.container}>
       {loading && page === 1 ? <LoadingProducts /> : null}
+      <ListHeader />
       <FlatList
         data={products}
         keyExtractor={(item) => item.id.toString()}
@@ -59,33 +84,38 @@ export const ProductList: React.FC<ProductListProps> = ({
         renderItem={({ item }) => <ProductContainer product={item} />}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.1}
-        ListFooterComponent={() =>
-          loading && page > 1 && hasMore ? (
-            <View style={styles.loadingProducts}>
-              <ActivityIndicator size="large" color="red" />
-            </View>
-          ) : null
-        }
+        ItemSeparatorComponent={() => <View style={{ marginRight: 12 }} />}
+        ListFooterComponent={<ListFooter />}
+        style={{}}
       />
     </View>
   );
 };
+const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
+  container: {
+    marginVertical: 16,
+    marginLeft: 16,
+    gap: 2,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '95%',
+    marginBottom: 12
+  },
   loadingProducts: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 30,
   },
-  productItem: {
-    marginRight: 16,
-  },
-  productTitle: {
-    fontSize: 16,
-    color: 'gray',
-  },
-  productList: {
-    marginLeft: 16,
+  categoryTitle: {
+    fontSize: screenWidth * 0.075,
+    fontWeight: 'bold',
+    color: 'black',
+    textTransform: 'capitalize',
   },
 });
