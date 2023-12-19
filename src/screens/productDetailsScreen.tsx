@@ -106,25 +106,11 @@ export const ProductDetailsScreen = () => {
       ),
     },
     {
-      key: 'quantity',
-      component: product ? (
-        <View style={styles.viewquanty}>
-          <View style={styles.containerquanty}>
-            <QuantityIndicator
-              productId={product.id}
-              increasestyle={styles.increasebutton}
-              decreasestyle={styles.decreasebutton}
-            />
-          </View>
-        </View>
-      ) : null,
-    },
-    {
       key: 'shipping',
       component: product ? (
         <TouchableOpacity
           style={[
-            styles.containerButton,
+            styles.containerButton1,
             showShippingInfo && styles.expandedButton,
           ]}
           onPress={() => setShowShippingInfo(!showShippingInfo)}
@@ -150,7 +136,7 @@ export const ProductDetailsScreen = () => {
       component: product ? (
         <TouchableOpacity
           style={[
-            styles.containerButton,
+            styles.containerButton2,
             showSupportInfo && styles.expandedButton,
           ]}
           onPress={() => setShowSupportInfo(!showSupportInfo)}
@@ -168,8 +154,7 @@ export const ProductDetailsScreen = () => {
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
               point of using Lorem Ipsum is that it has a more-or-less normal
-              distribution of letters, as opposed to using Content here, content
-              here, making it look like readable English.
+              distribution of letters, as opposed to using Content 
             </Text>
           )}
         </TouchableOpacity>
@@ -206,11 +191,24 @@ export const ProductDetailsScreen = () => {
           <ActivityIndicator size="large" color="#FF0024" />
         </View>
       ) : (
-        <FlatList
-          data={data}
-          renderItem={({ item }) => item.component}
-          keyExtractor={(item) => item.key}
-        />
+        <View>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => item.component}
+            keyExtractor={(item) => item.key}
+            style={{marginBottom: 120}}
+          />
+
+          <View style={styles.viewquanty}>
+            <View style={styles.containerquanty}>
+              <QuantityIndicator
+                productId={product.id}
+                increasestyle={styles.increasebutton}
+                decreasestyle={styles.decreasebutton}
+              />
+            </View>
+          </View>
+        </View>
       )}
       <StatusBar style="dark" />
     </View>
@@ -224,23 +222,31 @@ const styles = StyleSheet.create({
   containerinfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 16,
-    marginRight: 16,
+    marginHorizontal: 16,
+    marginTop: 64,
+    marginBottom: 40,
+
   },
   containerdesc: {
-    marginTop: 20,
     fontSize: 14,
     marginHorizontal: 16,
+    marginBottom: 62,
   },
+
   viewquanty: {
-    flex: 1,
+    marginTop: "170%",
+    backgroundColor: "#fff",
+    position: "absolute",
+    verticalAlign: "bottom",
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     marginBottom: 10,
     elevation: 8,
-    paddingVertical: 20,
+    paddingTop: 28,
+    paddingBottom: 45
   },
+  
   containerquanty: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -249,13 +255,12 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 500,
+    height: 400,
     resizeMode: 'cover',
   },
   name: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 10,
   },
   category: {
     fontSize: 11,
@@ -263,7 +268,6 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 24,
-    marginTop: 10,
     fontWeight: 'bold',
   },
   increasebutton: {
@@ -276,12 +280,19 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 16,
     height: 43,
   },
-  containerButton: {
+  containerButton1: {
     height: 56,
+    justifyContent: 'center',
+    borderColor: 'gray',
+    borderTopWidth: 1,
+  },
+  containerButton2: {
+
     justifyContent: 'center',
     borderColor: 'gray',
     borderWidth: 1,
   },
+
   expandedButton: {
     height: 150,
   },
