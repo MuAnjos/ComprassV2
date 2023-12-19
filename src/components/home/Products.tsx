@@ -20,7 +20,7 @@ type ProductDetailsParams = {
 
 export const Products: React.FC<ProductProps> = React.memo(
   ({ product }: ProductProps) => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
 
     const handleProductPress = () => {
       const params: ProductDetailsParams = { productId: product.id };
@@ -40,7 +40,13 @@ export const Products: React.FC<ProductProps> = React.memo(
           <View style={styles.info}>
             <Image source={{ uri: product.images[0] }} style={styles.image} />
             <Text style={styles.title}>{product.title}</Text>
-            <Text style={styles.description}>{description}</Text>
+            <Text
+              style={styles.description}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+            >
+              {description}
+            </Text>
           </View>
           <View style={styles.priceContainer}>
             <Text style={styles.price}>${formattedPrice}</Text>
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
     aspectRatio: 4 / 5,
   },
   title: {
-    fontSize: screenWidth * 0.03,
+    fontSize: 18,
     fontWeight: 'bold',
     color: 'gray',
   },
@@ -79,7 +85,7 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   description: {
-    fontSize: screenWidth * 0.02,
+    fontSize: 14,
   },
   info: {
     flex: 0,

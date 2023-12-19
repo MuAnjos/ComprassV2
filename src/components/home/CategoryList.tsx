@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { fetchCategories } from '../../services/fakeStoreAPI';
 import { ProductList } from './ProductList';
 
-interface Category {
+export interface Category {
   id: number;
   name: string;
 }
@@ -59,13 +59,7 @@ export const CategoryList = () => {
         data={categories}
         keyExtractor={(category) => category.id.toString()}
         renderItem={({ item }) => (
-          <View>
-            <View style={styles.container}>
-              <Text style={styles.categoryTitle}>{item.name}</Text>
-              <Text>View all</Text>
-            </View>
-            <ProductList categoryId={item.id} />
-          </View>
+          <ProductList item={item} categoryId={item.id} />
         )}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.1}
@@ -73,22 +67,3 @@ export const CategoryList = () => {
     </View>
   );
 };
-
-const screenWidth = Dimensions.get('window').width;
-
-const styles = StyleSheet.create({
-  categoryTitle: {
-    fontSize: screenWidth * 0.075,
-    fontWeight: 'bold',
-    color: 'black',
-    textTransform: 'capitalize',
-  },
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: screenWidth * 0.04,
-    marginRight: screenWidth * 0.04,
-    marginTop: screenWidth * 0.04,
-  },
-});
