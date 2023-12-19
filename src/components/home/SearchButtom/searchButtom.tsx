@@ -129,10 +129,8 @@ const styles = StyleSheet.create({
     maxHeight: screenWidth * 0.37,
   },
   searchButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: screenWidth * 0.1,
-    height: screenWidth * 0.1,
+    width: 41,
+    height: 41,
     marginRight: screenWidth * 0.04,
     backgroundColor: Colors.red_500,
     borderRadius: screenWidth * 0.05,
@@ -141,12 +139,12 @@ const styles = StyleSheet.create({
   searchBox: {
     backgroundColor: 'white',
     borderRadius: screenWidth * 0.15,
-    padding: screenWidth * 0.02,
     width: '92%',
     borderColor: Colors.red_500,
     borderWidth: screenWidth * 0.01,
     marginHorizontal: screenWidth * 0.04,
-    marginTop: screenWidth * 0.016,
+    padding: 4,
+    marginTop: 8,
   },
   text: {
     paddingLeft: screenWidth * 0.02,

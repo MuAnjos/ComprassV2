@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   ImageBackground,
-  Image,
   FlatList,
   Dimensions,
   RefreshControl,
@@ -16,9 +15,13 @@ import { CategoryList } from '../../components/home/CategoryList';
 import { SearchButton } from '../../components/home/SearchButtom/searchButtom';
 import { ActualUser } from '../../components/home/ActualUser';
 import { useAuth } from '../../contexts/AuthContext';
+import { FirstPartLogo } from '../../components/Icons/FirstPartLogo';
+import { LogoUol } from '../../components/Icons/LogoUol';
+import { Logo } from '../Login/styles';
+import { SecondPartLogo } from '../../components/Icons/SecondPartLogo';
+import { ShoppingCart } from '../../components/Icons/ShoppingCart';
 
 const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
 
 export const HomeScreen = () => {
   const [isFontsLoaded] = useFonts({
@@ -59,21 +62,22 @@ export const HomeScreen = () => {
         ListHeaderComponent={
           <View style={styles.bannercontainer}>
             <ImageBackground
-              source={require('../../../assets/images/home/compass-banner.jpg')}
+              source={require('../../../assets/images/home/compass-banner.png')}
               style={styles.backgroundImage}
             >
               {user ? <ActualUser /> : <></>}
-              <View style={styles.logo}>
-                <Text style={styles.logotext}>C</Text>
-                <Image
-                  source={require('../../../assets/images/home/logo-compass-uol.png')}
-                  style={styles.logopic}
-                />
-                <Text style={styles.logotext}>mprass</Text>
-              </View>
+              <Logo style={{ marginTop: screenHeight * 0.19 }}>
+                <FirstPartLogo />
+                <View style={{ marginLeft: 4.7, marginRight: 5.91 }}>
+                  <LogoUol />
+                </View>
+                <View style={{ marginBottom: -8.52 }}>
+                  <SecondPartLogo />
+                </View>
+              </Logo>
               <View style={styles.slogan}>
-                <Text style={styles.slogantext}>Here you always win!</Text>
-                <Entypo name="shopping-cart" size={46} color="red" />
+                <Text color={'#fff'} style={{marginBottom: 0, marginRight: 16}}>Here you always win!</Text>
+                <ShoppingCart/>
               </View>
             </ImageBackground>
           </View>
@@ -98,6 +102,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   bannercontainer: {
+    paddingTop: 50,
+    backgroundColor: '#000',
     height: screenHeight * 0.5,
   },
   productscontainer: {
@@ -107,32 +113,10 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     height: '100%',
   },
-  logo: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logotext: {
-    fontSize: screenHeight * 0.05,
-    color: 'white',
-  },
-  logopic: {
-    width: screenWidth * 0.08,
-    height: screenWidth * 0.08,
-  },
   slogan: {
-    color: 'white',
-    marginLeft: screenWidth * 0.03,
-    marginBottom: screenHeight * 0.02,
-    position: 'absolute',
-    bottom: 0,
+    marginLeft: 16,
+    marginTop: 70,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  slogantext: {
-    color: 'white',
-    fontSize: screenHeight * 0.03,
-    marginRight: screenWidth * 0.03,
   },
 });
