@@ -72,9 +72,8 @@ export const ProductList: React.FC<ProductListProps> = ({
       </View>
     ) : null;
 
-  return (
-    <View style={styles.container}>
-      {loading && page === 1 ? <LoadingProducts /> : null}
+  const List = () => (
+    <>
       <ListHeader />
       <FlatList
         data={products}
@@ -84,10 +83,16 @@ export const ProductList: React.FC<ProductListProps> = ({
         renderItem={({ item }) => <ProductContainer product={item} />}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.1}
-        ItemSeparatorComponent={() => <View style={{ marginRight: 12 }} />}
+        ItemSeparatorComponent={() => <View style={{ marginHorizontal: 8 }} />}
         ListFooterComponent={<ListFooter />}
-        style={{}}
       />
+    </>
+  );
+
+  return (
+    <View style={styles.container}>
+      {loading && page === 1 ? <LoadingProducts /> : null}
+      {products.length > 0 && <List />}
     </View>
   );
 };
@@ -95,7 +100,7 @@ const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 16,
+    marginVertical: 12,
     marginLeft: 16,
     gap: 2,
   },
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '95%',
-    marginBottom: 12
+    marginBottom: 12,
   },
   loadingProducts: {
     flex: 1,

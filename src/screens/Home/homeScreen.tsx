@@ -8,9 +8,8 @@ import {
   RefreshControl,
 } from 'react-native';
 import { useFonts } from 'expo-font';
-import { Text } from '../../components/Text';
 import { StatusBar } from 'expo-status-bar';
-import { Entypo } from '@expo/vector-icons';
+import { Text } from '../../components/Text';
 import { CategoryList } from '../../components/home/CategoryList';
 import { SearchButton } from '../../components/home/SearchButtom/searchButtom';
 import { ActualUser } from '../../components/home/ActualUser';
@@ -76,8 +75,12 @@ export const HomeScreen = () => {
                 </View>
               </Logo>
               <View style={styles.slogan}>
-                <Text color={'#fff'} style={{marginBottom: 0, marginRight: 16}}>Here you always win!</Text>
-                <ShoppingCart/>
+                <Text
+                  style={{ marginBottom: 0, marginRight: 16, color: '#fff' }}
+                >
+                  Here you always win!
+                </Text>
+                <ShoppingCart />
               </View>
             </ImageBackground>
           </View>

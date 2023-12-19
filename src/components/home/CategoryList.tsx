@@ -21,20 +21,22 @@ export const CategoryList = () => {
     setLoading(true);
 
     try {
-      const categoriesData = await fetchCategories();
-      if (categoriesData.length === 0) {
+      const fetchedCategories: Category[] = await fetchCategories();
+      if (fetchedCategories.length === 0) {
         setHasMore(false);
       } else {
-        const newCategories = categoriesData.filter((category: any) => {
-          return !categories.some(
-            (existingCategory) => existingCategory.id === category.id,
-          );
-        });
+        if (fetchedCategories.length > 0) {
+          const newCategories = fetchedCategories.filter((category: any) => {
+            return !categories.some(
+              (existingCategory) => existingCategory.id === category.id,
+            );
+          });
 
-        setCategories((prevCategories) => [
-          ...prevCategories,
-          ...newCategories,
-        ]);
+          setCategories((prevCategories) => [
+            ...prevCategories,
+            ...newCategories,
+          ]);
+        }
       }
     } catch (error) {
       console.error('Erro ao buscar categorias:', error);
