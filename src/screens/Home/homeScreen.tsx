@@ -19,6 +19,7 @@ import { LogoUol } from '../../components/Icons/LogoUol';
 import { Logo } from '../Login/styles';
 import { SecondPartLogo } from '../../components/Icons/SecondPartLogo';
 import { ShoppingCart } from '../../components/Icons/ShoppingCart';
+import { useIsFocused } from '@react-navigation/native';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -42,60 +43,70 @@ export const HomeScreen = () => {
     }, 1000);
   };
 
-  if (!isFontsLoaded) {
-    return null;
+  function FocusAwareStatusBar() {
+    const isFocused = useIsFocused();
+    return isFocused ? (
+      <StatusBar style="light" backgroundColor="#000" />
+    ) : null;
   }
 
+    if (!isFontsLoaded) {
+      return null;
+    }
+
   return (
-    <View style={styles.container}>
-      <SearchButton />
-      <FlatList
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            tintColor="red"
-          />
-        }
-        key={forceRerender ? 'key-1' : 'key-2'}
-        ListHeaderComponent={
-          <View style={styles.bannercontainer}>
-            <ImageBackground
-              source={require('../../../assets/images/home/compass-banner.png')}
-              style={styles.backgroundImage}
-            >
-              {user ? <ActualUser /> : <></>}
-              <Logo style={{ marginTop: screenHeight * 0.19 }}>
-                <FirstPartLogo />
-                <View style={{ marginLeft: 4.7, marginRight: 5.91 }}>
-                  <LogoUol />
+    <>
+      <FocusAwareStatusBar />
+
+      <View style={styles.container}>
+        <SearchButton />
+        <FlatList
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor="red"
+            />
+          }
+          key={forceRerender ? 'key-1' : 'key-2'}
+          ListHeaderComponent={
+            <View style={styles.bannercontainer}>
+              <ImageBackground
+                source={require('../../../assets/images/home/compass-banner.png')}
+                style={styles.backgroundImage}
+              >
+                {user ? <ActualUser /> : <></>}
+                <Logo style={{ marginTop: screenHeight * 0.19 }}>
+                  <FirstPartLogo />
+                  <View style={{ marginLeft: 4.7, marginRight: 5.91 }}>
+                    <LogoUol />
+                  </View>
+                  <View style={{ marginBottom: -8.52 }}>
+                    <SecondPartLogo />
+                  </View>
+                </Logo>
+                <View style={styles.slogan}>
+                  <Text
+                    style={{ marginBottom: 0, marginRight: 16, color: '#fff' }}
+                  >
+                    Here you always win!
+                  </Text>
+                  <ShoppingCart />
                 </View>
-                <View style={{ marginBottom: -8.52 }}>
-                  <SecondPartLogo />
-                </View>
-              </Logo>
-              <View style={styles.slogan}>
-                <Text
-                  style={{ marginBottom: 0, marginRight: 16, color: '#fff' }}
-                >
-                  Here you always win!
-                </Text>
-                <ShoppingCart />
-              </View>
-            </ImageBackground>
-          </View>
-        }
-        data={[1]}
-        extraData={forceRerender}
-        renderItem={() => (
-          <View style={styles.productscontainer}>
-            <CategoryList />
-          </View>
-        )}
-        keyExtractor={(item) => item.toString()}
-      />
-      <StatusBar style="light" />
-    </View>
+              </ImageBackground>
+            </View>
+          }
+          data={[1]}
+          extraData={forceRerender}
+          renderItem={() => (
+            <View style={styles.productscontainer}>
+              <CategoryList />
+            </View>
+          )}
+          keyExtractor={(item) => item.toString()}
+        />
+      </View>
+    </>
   );
 };
 

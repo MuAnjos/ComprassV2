@@ -11,8 +11,8 @@ function App() {
         <MainNavigator />
       </NavigationContainer>
       <StatusBar
-        backgroundColor="black" // Define o fundo preto
-        barStyle="light-content" // Define letras brancas
+        backgroundColor="black"
+        barStyle="light-content"
       />
     </AuthProvider>
   );

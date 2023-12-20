@@ -3,20 +3,29 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   Image,
   Switch,
   TouchableOpacity,
-  StatusBar,
 } from 'react-native';
+import { Text } from '../components/Text';
+import { useFonts } from 'expo-font';
 import { Entypo } from '@expo/vector-icons';
 import { LanguageOption } from '../components/profileComponents/LanguageOption';
 import { EditInfos } from '../components/profileComponents/EditInfos';
 import { LogOutWarning } from '../components/profileComponents/Warnings';
 import { AntDesign } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
+import { useIsFocused } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
 
 export const ProfileScreen = () => {
+  const [isFontsLoaded] = useFonts({
+    'OpenSans-400': require('../assets/fonts/OpenSans-Regular.ttf'),
+    'OpenSans-600': require('../assets/fonts/OpenSans-SemiBold.ttf'),
+    'OpenSans-700': require('../assets/fonts/OpenSans-Bold.ttf'),
+    'OpenSans-800': require('../assets/fonts/OpenSans-ExtraBold.ttf'),
+  });
+
   const [isEnabled, setIsEnabled] = useState(false);
   const [verificationIcon, setVerificationIcon] = useState(false);
   const [nameInput, setNameInput] = useState('');
@@ -27,6 +36,11 @@ export const ProfileScreen = () => {
   const [userId, setUserId] = useState(null);
 
   const { user } = useAuth();
+
+  function FocusAwareStatusBar() {
+    const isFocused = useIsFocused();
+    return isFocused ? <StatusBar style="dark" backgroundColor="#fff" /> : null;
+  }
 
   useEffect(() => {
     if (user) {
@@ -71,8 +85,7 @@ export const ProfileScreen = () => {
         setImage(data.avatar);
       } else {
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const updateUserProfile = async (newName: string) => {
@@ -92,8 +105,7 @@ export const ProfileScreen = () => {
         const updatedUser = await response.json();
         setNameInput(updatedUser.name);
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleVerificationPress = () => {
@@ -104,67 +116,75 @@ export const ProfileScreen = () => {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor={'#F9F9F9'} barStyle={'dark-content'} />
-      {verificationIcon && (
-        <TouchableOpacity
-          style={styles.verification}
-          onPress={handleVerificationPress}
-        >
-          <AntDesign name="checkcircle" size={46} color="#2AA952" />
-        </TouchableOpacity>
-      )}
-      <View style={styles.titleImageContainer}>
-        <View style={styles.containerTitle}>
-          <Text style={styles.textTitle}>My profile</Text>
-        </View>
+  if (!isFontsLoaded) {
+    return null;
+  }
 
-        <Image
-          style={styles.image}
-          source={{
-            uri: `${image}`,
-          }}
-        />
-      </View>
-      <View style={styles.textInfoContainer}>
-        {isEnabled ? (
-          <EditInfos userName={nameInput} onNameChange={setNameInput} />
-        ) : (
-          <Text style={styles.textName}>{nameInput}</Text>
+  return (
+    <>
+      <FocusAwareStatusBar />
+      <View style={styles.container}>
+        {verificationIcon && (
+          <TouchableOpacity
+            style={styles.verification}
+            onPress={handleVerificationPress}
+          >
+            <AntDesign name="checkcircle" size={46} color="#2AA952" />
+          </TouchableOpacity>
         )}
-        <Text style={styles.textEmail}>{email || 'matildabrown@mail.com'}</Text>
-      </View>
-      <View style={styles.edits}>
-        <Text style={styles.text}>Edit Informations</Text>
-        <Switch
-          trackColor={{ false: '#C0C0C0', true: '#FF0024' }}
-          thumbColor={isEnabled ? '#9B9B9B' : '#9B9B9B'}
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-          style={styles.buttonSwitch}
-        />
-      </View>
-      <LanguageOption />
-      <View style={styles.edits}>
-        <Text style={styles.text}>Log out</Text>
-        <TouchableOpacity onPress={() => setIsLogOutWarningVisible(true)}>
-          <Entypo
-            name="log-out"
-            size={20}
-            color="#9B9B9B"
-            style={styles.iconLog}
+        <View style={styles.titleImageContainer}>
+          <View style={styles.containerTitle}>
+            <Text style={styles.textTitle}>My profile</Text>
+          </View>
+
+          <Image
+            style={styles.image}
+            source={{
+              uri: `${image}`,
+            }}
           />
-        </TouchableOpacity>
-        {isLogOutWarningVisible && (
-          <LogOutWarning
-            visible={isLogOutWarningVisible}
-            onCloseModal={handleCloseModal}
-            onNoPress={handleNoPress}
+        </View>
+        <View style={styles.textInfoContainer}>
+          {isEnabled ? (
+            <EditInfos userName={nameInput} onNameChange={setNameInput} />
+          ) : (
+            <Text style={styles.textName}>{nameInput}</Text>
+          )}
+          <Text style={styles.textEmail}>
+            {email || 'matildabrown@mail.com'}
+          </Text>
+        </View>
+        <View style={styles.edits}>
+          <Text style={styles.text}>Edit Informations</Text>
+          <Switch
+            trackColor={{ false: '#C0C0C0', true: '#FF0024' }}
+            thumbColor={isEnabled ? '#9B9B9B' : '#9B9B9B'}
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+            style={styles.buttonSwitch}
           />
-        )}
+        </View>
+        <LanguageOption />
+        <View style={styles.edits}>
+          <Text style={styles.text}>Log out</Text>
+          <TouchableOpacity onPress={() => setIsLogOutWarningVisible(true)}>
+            <Entypo
+              name="log-out"
+              size={20}
+              color="#9B9B9B"
+              style={styles.iconLog}
+            />
+          </TouchableOpacity>
+          {isLogOutWarningVisible && (
+            <LogOutWarning
+              visible={isLogOutWarningVisible}
+              onCloseModal={handleCloseModal}
+              onNoPress={handleNoPress}
+            />
+          )}
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 
