@@ -73,7 +73,7 @@ export const ProductList: React.FC<ProductListProps> = ({
     ) : null;
 
   const List = () => (
-    <>
+    <View style={styles.container}>
       <ListHeader />
       <FlatList
         data={products}
@@ -86,21 +86,21 @@ export const ProductList: React.FC<ProductListProps> = ({
         ItemSeparatorComponent={() => <View style={{ marginHorizontal: 8 }} />}
         ListFooterComponent={<ListFooter />}
       />
-    </>
+    </View>
   );
 
   return (
-    <View style={styles.container}>
+    <>
       {loading && page === 1 ? <LoadingProducts /> : null}
       {products.length > 0 && <List />}
-    </View>
+    </>
   );
 };
 const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 12,
+    marginVertical: 16,
     marginLeft: 16,
     gap: 2,
   },
