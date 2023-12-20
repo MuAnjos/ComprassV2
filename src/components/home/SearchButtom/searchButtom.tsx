@@ -26,7 +26,7 @@ export const SearchButton = () => {
   };
 
   const handleButtonClick = () => {
-    setShowSearchBox(!showSearchBox);
+    setShowSearchBox((prevState) => !prevState);
     setSearchWord('');
   };
 
