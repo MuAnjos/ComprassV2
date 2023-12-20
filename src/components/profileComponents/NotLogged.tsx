@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 export const NotLogged = () => {
 
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#F9F9F9'} barStyle={'dark-content'}/>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9F9F9'
   },
   titleContainer: {
-    marginTop: 107,
+    marginTop: 70,
     marginLeft: 16,
     marginRight: 190,
     flexDirection: 'column',
