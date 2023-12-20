@@ -17,9 +17,7 @@ export const CategoryList = () => {
     if (loading || !hasMore) {
       return;
     }
-
     setLoading(true);
-
     try {
       const fetchedCategories: Category[] = await fetchCategories();
       if (fetchedCategories.length === 0) {

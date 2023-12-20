@@ -71,7 +71,7 @@ export const HomeScreen = () => {
                 source={require('../../../assets/images/home/compass-banner.png')}
                 style={styles.backgroundImage}
               >
-                {user ? <ActualUser /> : <></>}
+                {user && <ActualUser />}
                 <Logo style={{ marginTop: screenHeight * 0.19 }}>
                   <FirstPartLogo />
                   <View style={{ marginLeft: 4.7, marginRight: 5.91 }}>
