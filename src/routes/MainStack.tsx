@@ -92,25 +92,21 @@ export const MainNavigator = () => {
         component={AdressScreen}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name="SuccessScreen"
         component={SuccessScreen}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name="SuccessScreen2"
         component={SuccessScreen2}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name="SuccessDownloadBill"
         component={SuccessDownloadBill}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name="SuccessQRcodeScreen"
         component={SuccessQRcodeScreen}

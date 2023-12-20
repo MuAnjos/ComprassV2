@@ -144,7 +144,7 @@ export const ProfileScreen = () => {
             }}
           />
         </View>
-        <View style={styles.textInfoContainer}>
+        <View>
           {isEnabled ? (
             <EditInfos userName={nameInput} onNameChange={setNameInput} />
           ) : (
@@ -198,11 +198,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 16,
-    marginTop: 35,
+    marginTop: 66,
     marginRight: 5,
   },
   titleImageContainer: {
-    marginTop: 64,
+    marginTop: 105,
     flexDirection: 'column',
     width: '100%',
     justifyContent: 'center',
@@ -222,9 +222,6 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
-  textInfoContainer: {
-    marginLeft: 16,
-  },
   textName: {
     marginTop: 13.12,
     textAlign: 'center',
@@ -233,9 +230,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   textEmail: {
-    marginLeft: 48,
     fontSize: 14,
     color: '#9B9B9B',
+    alignSelf: 'center',
   },
   edits: {
     paddingVertical: 23,
