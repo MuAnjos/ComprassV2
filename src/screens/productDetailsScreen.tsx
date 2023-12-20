@@ -154,7 +154,7 @@ export const ProductDetailsScreen = () => {
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
               point of using Lorem Ipsum is that it has a more-or-less normal
-              distribution of letters, as opposed to using Content 
+              distribution of letters, as opposed to using Content
             </Text>
           )}
         </TouchableOpacity>
@@ -231,19 +231,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 62,
   },
-
   viewquanty: {
     marginTop: "172%",
     position: "absolute",
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    paddingTop: 28,
+    paddingTop: 10,
     paddingBottom: 45,
     backgroundColor: "#fff",
     elevation:8
   },
-  
   containerquanty: {
     alignItems: 'center',
     justifyContent: 'center',
