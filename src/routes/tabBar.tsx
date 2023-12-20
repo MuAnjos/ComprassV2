@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ProfileScreen } from '../screens/profileScreen';
-import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { HomeScreen } from '../screens/Home/homeScreen';
 import { CartScreen } from '../screens/CartScreen';
 import { useAuth } from '../contexts/AuthContext';
@@ -12,7 +11,6 @@ const Tab = createBottomTabNavigator();
 
 export function TabNavigator() {
   const { user } = useAuth();
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -20,9 +18,6 @@ export function TabNavigator() {
         tabBarStyle: {
           backgroundColor: '#FFF',
           borderTopColor: 'transparent',
-          elevation: 5,
-          height: 83,
-          paddingVertical: 14,
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
           justifyContent: 'center',
@@ -34,23 +29,39 @@ export function TabNavigator() {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: () => <Entypo name="home" size={30} color="red" />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? 'home' : 'home-outline'}
+              size={28}
+              color="red"
+            />
+          ),
         }}
       />
       <Tab.Screen
         name="Cart"
         component={CartScreen}
         options={{
-          tabBarIcon: () => (
-            <AntDesign name="shoppingcart" size={30} color="red" />
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? 'cart' : 'cart-outline'}
+              size={28}
+              color="red"
+            />
           ),
         }}
       />
       <Tab.Screen
         name="Profile"
-        component={user ? ProfileScreen : NotLogged}  
+        component={user ? ProfileScreen : NotLogged}
         options={{
-          tabBarIcon: () => <AntDesign name="user" size={30} color="red" />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? 'person' : 'person-outline'}
+              size={28}
+              color="red"
+            />
+          ),
         }}
       />
     </Tab.Navigator>

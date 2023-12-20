@@ -44,20 +44,16 @@ export const HomeScreen = () => {
   };
 
   function FocusAwareStatusBar() {
-    const isFocused = useIsFocused();
-    return isFocused ? (
-      <StatusBar style="light" backgroundColor="#000" />
-    ) : null;
+    return useIsFocused() && <StatusBar style="light" backgroundColor="#000" />;
   }
 
-    if (!isFontsLoaded) {
-      return null;
-    }
+  if (!isFontsLoaded) {
+    return null;
+  }
 
   return (
     <>
       <FocusAwareStatusBar />
-
       <View style={styles.container}>
         <SearchButton />
         <FlatList
