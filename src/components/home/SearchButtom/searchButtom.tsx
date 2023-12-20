@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginHorizontal: screenWidth * 0.08,
     marginTop: screenWidth * 0.02,
     borderRadius: 15,
-    maxHeight: screenWidth * 0.37,
+    maxHeight: 235,
   },
   searchButton: {
     width: 41,

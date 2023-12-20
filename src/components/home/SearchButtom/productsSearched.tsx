@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: Colors.gray_200,
     borderBottomWidth: 1,
-    paddingHorizontal: screenWidth * 0.02,
+    paddingHorizontal: screenWidth * 0.05,
   },
   image: {
-    height: screenWidth * 0.09,
+    height: 66,
     aspectRatio: 1,
     marginHorizontal: screenWidth * 0.01,
     marginVertical: screenWidth * 0.015,
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    fontSize: screenWidth * 0.03,
+    fontSize: 14,
   },
   desc: {
-    fontSize: screenWidth * 0.025,
+    fontSize: 10,
   },
   price: {
     textAlign: 'right',
-    fontSize: screenWidth * 0.03,
+    fontSize: 16,
     color: Colors.red_500,
     fontWeight: 'bold',
     marginRight: screenWidth * 0.02,

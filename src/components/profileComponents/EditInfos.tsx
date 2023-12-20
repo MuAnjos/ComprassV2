@@ -17,7 +17,6 @@ export const EditInfos = ({ userName, onNameChange }: EditInfosProps) => {
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.textInput}
-        placeholder="Edit your name"
         value={userName}
         onChangeText={handleNameChange}
       />
@@ -30,8 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textInput: {
-    width: 300,
-    height: 40,
+    height: 29,
     borderTopColor: '#F9F9F9',
     borderRightColor: '#F9F9F9',
     borderLeftColor: '#F9F9F9',
