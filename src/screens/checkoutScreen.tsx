@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   Modal,
   Image,
@@ -14,7 +13,7 @@ import CreditCardModal from '../components/checkoutComponents/CreditCardModal';
 import DeliverySelection from '../components/checkoutComponents/DeliverySelection';
 import { useAddress } from '../../contexts/zustand';
 
-const CheckoutScreen = (props: any) => {
+const CheckoutScreen = () => {
   const [shippingAddress, setShippingAddress] = useState(
     useAddress.getState().address[0] || {},
   );
@@ -27,12 +26,11 @@ const CheckoutScreen = (props: any) => {
   const [showCardLogo, setShowCardLogo] = useState(false);
   const [showBoletoLogo, setShowBoletoLogo] = useState(false);
   const [cardNumber, setCardNumber] = useState(false);
-  const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(null);
 
   useEffect(() => {}, []);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -319,7 +317,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#FFF',
     shadowColor: '#rgba',
-
     shadowOffset: {
       width: 0,
       height: 1,
@@ -328,7 +325,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
-
   changeButton: {
     position: 'absolute',
     top: 18,
@@ -341,7 +337,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 20,
   },
-
   input: {
     fontSize: 14,
     height: '100%',

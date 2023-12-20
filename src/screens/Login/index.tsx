@@ -35,7 +35,7 @@ export function LoginScreen() {
     'OpenSans-800': require('../../assets/fonts/OpenSans-ExtraBold.ttf'),
   });
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [requestStatus, setRequestStatus] = useState('');
   const { user, signIn } = useAuth();
@@ -75,6 +75,7 @@ export function LoginScreen() {
       .then((data) => {
         const { access_token } = data;
         signIn(access_token);
+        navigation.navigate('Home');
       })
       .catch((error) => {
         setRequestStatus('Something happened, try again later');
